@@ -50,6 +50,77 @@ Opened Main page of site, two products(watches and piano) in basket(first and se
 | 3 | Click _trash_ icon under second product (piano)  | Page information updated. Icons of cart in top have number 0. There are no product. In this block we see only one message _"You have no items in your shopping cart."_. |
 
 
+## 4. Check searching
+
+
+***Preconditions:*** 
+
+Opened Main page of site
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | on main page in search bar input text "asdsasdasd" | Search-result page is opened. We see next text "Your search - asdsasdasd - did not match any answers we have." |
+| 2 | on main page in search bar input text "Calculators"   | Search-result page is opened. Opened list of calculators |
+
+
+## 5. Check favourite list
+
+
+***Preconditions:*** 
+
+Casio watches-classic page is opened
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | On opened page click in block of watches "Casio w218HC-AV" on "heart" icon | Color of this icon is change to black |
+| 2 | In navigation click button of favourite   | Favourites page is opened. There are title of category of product and added product(watches) |
 
  
- 
+## 6. Check comparing
+
+***Preconditions:*** 
+
+Favourites page is opened, two products(watches) add to favourite
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | Make checkboxes under product true | Checkboxes are choose. Button compare watches items is available |
+| 2 | Click "Compare watches items" button   | Compare page is opened. Choosen product are in it? and their characteristics compared. |
+
+
+## 7. Check filter of watches
+
+***Preconditions:*** 
+
+Whatches Casio page is opened
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | Open filter article | In Right side showed filter block. |
+| 2 | Choose in Black color and Analog display in settings. then Click button show  | In list shown only black analog watches. |
+| 3 | Open filter artice and clear all filters | List returned to initial variant |
+
+
+## 8. Check Sorting in Filters
+
+***Preconditions:*** 
+
+Whatches Casio page is opened. opened filter article
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | CLick Price:High-Low button and Show button | Watches sorted by it price, from high price to low |
+| 2 | Click Price:Low-High button and Show button | Watches sorted by it price, from low price to high |
+| 3 | Click Weight:Heavy-Light button and Show button | Watches sorted by it weight, from Heavy price to Light |
+| 4 | Click Weight:Light-Heavy button and Show button | Watches sorted by it weight, from Light price to Heavy |
+| 5 | Click Newest button and Show button | List sort returned to initial variant |
