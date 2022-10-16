@@ -98,7 +98,7 @@ Favourites page is opened, two products(watches) add to favourite
 
 ***Preconditions:*** 
 
-Whatches Casio page is opened
+Watches Casio page is opened
 
 ***Test steps:***
 
@@ -106,21 +106,48 @@ Whatches Casio page is opened
 |---|------------------------|-------------------|
 | 1 | Open filter article | In Right side showed filter block. |
 | 2 | Choose in Black color and Analog display in settings. then Click button show  | In list shown only black analog watches. |
-| 3 | Open filter artice and clear all filters | List returned to initil variant |
+| 3 | Open filter artice and clear all filters | List returned to initial variant |
 
 
 ## 8. Check Sorting in Filters
 
 ***Preconditions:*** 
 
-Whatches Casio page is opened. opened filter article
+Watches Casio page is opened. opened filter article
 
 ***Test steps:***
 
 | № |  Step Description   |  Expected Result  |
 |---|------------------------|-------------------|
-| 1 | CLick Price:High-Low button and Show button | Watches sorted by it price, from high price to low |
-| 2 | Click Price:Low-High button and Show button | Watches sorted by it price, from low price to high |
-| 3 | Click Weight:Heavy-Light button and Show button | Watches sorted by it weight, from Heavy price to Light |
-| 4 | Click Weight:Light-Heavy button and Show button | Watches sorted by it weight, from Light price to Heavy |
-| 4 | Click Newest button and Show button | List sort returned to initial variant |
+| 1 | CLick _Price:High-Low_ button and Show button | Watches sorted by it price, from high price to low |
+| 2 | Click _Price:Low-High_ button and Show button | Watches sorted by it price, from low price to high |
+| 3 | Click _Weight:Heavy-Light_ button and Show button | Watches sorted by it weight, from Heavy price to Light |
+| 4 | Click _Weight:Light-Heavy_ button and Show button | Watches sorted by it weight, from Light price to Heavy |
+| 5 | Click _Newest_ button and Show button | List sort returned to initial variant |
+
+
+## 9. Change location
+
+***Preconditions:*** 
+
+Main page is opened. Base location is USA
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | In footer click _United States_ button | Select Loacation page is opened |
+| 2 | Choose _English(UK&Ireland)_ location | Opened _UK location_ version of site |
+
+
+## 10. View of musical instrumental page
+
+***Preconditions:*** 
+
+Main page is opened
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | In navigation panel move cursor to _Electronic musical instruments_ and Click _ALL ELECTRONIC MUSICAL INSTRUMENTS_ |  |
