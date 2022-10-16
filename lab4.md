@@ -150,4 +150,34 @@ Main page is opened
 
 | № |  Step Description   |  Expected Result  |
 |---|------------------------|-------------------|
-| 1 | In navigation panel move cursor to _Electronic musical instruments_ and Click _ALL ELECTRONIC MUSICAL INSTRUMENTS_ | Opened list of product(musical instruments, f.e. piano) |
+| 1 | In navigation panel move cursor to _Electronic musical instruments_ and Click _ALL ELECTRONIC MUSICAL INSTRUMENTS_ | Opened page with list of product(musical instruments, f.e. piano) |
+
+
+## 11. Check help-bot
+
+***Preconditions:*** 
+
+Main page is opened
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | In right-bottom side click _Help_ | Opened frame with Casio-bot |
+| 2 | Print "test" and press _Enter_  | Bot send 3 articles which connected with word "test" |
+
+## 12. Find manuals
+
+***Preconditions:*** 
+
+Manuals(Support) page is opened
+
+***Test steps:***
+
+| № |  Step Description   |  Expected Result  |
+|---|------------------------|-------------------|
+| 1 | Choose type of item(Timepieces (Watches)) and click it | Opened page with languages choose |
+| 2 | Choose _English_ language and click it  | Opened page with watch manual archives |
+| 3 | In _Module No._ form write "_593_" and click search  | Opened page with list of finding manuals in pdf format |
+| 4 | Click _Module No. 593_ | Opened _.pdf_ file with manual |
+
