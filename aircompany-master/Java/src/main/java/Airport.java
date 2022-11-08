@@ -1,4 +1,5 @@
 import Planes.ExperimentalPlane;
+import Types.ClassificationLevel;
 import Types.MilitaryType;
 import Planes.MilitaryPlane;
 import Planes.PassengerPlane;
@@ -74,6 +75,17 @@ public class Airport {
         }
         return experimentalPlanes;
     }
+    public List<ExperimentalPlane> getExperimentalPlanesWithoutClassification() {
+        List<ExperimentalPlane> experimentalPlanes = getExperimentalPlanes();
+        List<ExperimentalPlane> experimentalUnclassifiedPlanes = new ArrayList<>();
+        for(ExperimentalPlane experimentalPlane : experimentalPlanes){
+            if(experimentalPlane.getClassificationLevel() == ClassificationLevel.UNCLASSIFIED){
+                experimentalUnclassifiedPlanes.add((ExperimentalPlane) experimentalPlane);
+            }
+        }
+        return experimentalUnclassifiedPlanes;
+    }
+
 
     public Collection<? extends Plane> sortByMaxDistance() {
         planes.sort((Comparator<Plane>) (o1, o2) -> o1.getMaxFlightDistance() - o2.getMaxFlightDistance());
@@ -89,7 +101,7 @@ public class Airport {
     }
 
     public Collection<? extends Plane> sortByMaxLoadCapacity() {
-        planes.sort((Comparator<Plane>) (o1, o2) -> o1.getMinLoadCapacity() - o2.getMinLoadCapacity());
+        planes.sort((Comparator<Plane>) (o1, o2) -> o1.getMaxLoadCapacity() - o2.getMaxLoadCapacity());
         return planes;
     }
 
@@ -97,7 +109,7 @@ public class Airport {
         return planes;
     }
 
-    private void print(Collection<? extends Plane> collection) {
+    private void printPlanes(Collection<? extends Plane> collection) {
         Iterator<? extends Plane> iterator = collection.iterator();
         while (iterator.hasNext()) {
             Plane plane = iterator.next();
