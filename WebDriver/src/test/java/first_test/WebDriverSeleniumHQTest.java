@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WebDriverSeleniumHQTest {
 
@@ -72,6 +73,29 @@ public class WebDriverSeleniumHQTest {
         //Thread.sleep(3000);
         Assert.assertNotNull(driver.findElement(By.className("item-info")));
     }
+
+
+    @Test
+    public void searchForWatches() throws InterruptedException {
+        driver.get("https://www.casio.co.uk/");
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("hs-eu-decline-button")));
+
+        WebElement buttonCloseCookies = driver.findElement(By.id("hs-eu-decline-button"));
+        buttonCloseCookies.click();
+
+        WebElement searchBox;
+        searchBox = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='search' and @placeholder='Search here']")));
+
+        searchBox.sendKeys("F-91W-1XY");
+        List<WebElement> searchResult = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//li/a/div[@class='klevu-name-desc-l2']/div[@class='klevu-name-l2' and contains(.,'F-91W-1XY')]")));
+        Assert.assertNotNull(searchResult);
+        //Thread.sleep(3000);
+    }
+
     @AfterTest(alwaysRun = true)
     public void browserTearDown(){
         driver.quit();
