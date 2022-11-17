@@ -39,7 +39,7 @@ public class WebDriverSeleniumHQTest {
 
 
 
-    //@Test
+    @Test
     public void addWatchesCasioWVSeriesToCart() throws InterruptedException {
         driver.get("https://www.casio.co.uk/");
 
