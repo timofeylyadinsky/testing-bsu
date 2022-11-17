@@ -46,7 +46,8 @@ public class WebDriverSeleniumHQTest {
         WebElement buttonCloseCookies = driver.findElement(By.id("hs-eu-decline-button"));
         buttonCloseCookies.click();
 
-        WebElement buttonToAllWatchesList = driver.findElement(By.xpath("/html/body/div[3]/header/div/nav/ul/li[1]/ul/li[2]"));
+        WebElement buttonToAllWatchesList = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[3]/header/div/nav/ul/li[1]/ul/li[2]")));
 
         buttonToAllWatchesList.click();
         WebElement buttonToClassicWatches;
