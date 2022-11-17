@@ -25,7 +25,7 @@ public class WebDriverSeleniumHQTest {
 
         ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080",
+        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080",
                 "--disable-extensions", "--proxy-server='direct://'", "--proxy-bypass-list=*", "--start-maximized",
                 "--disable-gpu", "--ignore-certificate-errors","user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36");
         driver = new ChromeDriver(options);
@@ -39,9 +39,12 @@ public class WebDriverSeleniumHQTest {
 
 
 
-    @Test
+    //@Test
     public void addWatchesCasioWVSeriesToCart() throws InterruptedException {
         driver.get("https://www.casio.co.uk/");
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("hs-eu-decline-button")));
 
         WebElement buttonCloseCookies = driver.findElement(By.id("hs-eu-decline-button"));
         buttonCloseCookies.click();
