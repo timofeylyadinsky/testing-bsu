@@ -1,6 +1,8 @@
 package first_test;
 
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WebDriverSeleniumHQTest {
 
@@ -25,7 +28,7 @@ public class WebDriverSeleniumHQTest {
 
         ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080",
+        options.addArguments(/*"--headless", */"--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080",
                 "--disable-extensions", "--proxy-server='direct://'", "--proxy-bypass-list=*", "--start-maximized",
                 "--disable-gpu", "--ignore-certificate-errors","user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36");
         driver = new ChromeDriver(options);
@@ -99,6 +102,78 @@ public class WebDriverSeleniumHQTest {
         Assert.assertNotNull(searchResult);
         //Thread.sleep(3000);
     }
+
+
+
+    @Test
+    public void changeQuantitiesOfWatchesCasioWVSeriesInCart() throws InterruptedException {
+        driver.get("https://www.casio.co.uk/");
+
+
+        String nameModelOfWatches = "WVA-M640D-2AER";
+        String numberOfCount = "2";
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("hs-eu-decline-button")));
+
+        WebElement buttonCloseCookies = driver.findElement(By.id("hs-eu-decline-button"));
+        buttonCloseCookies.click();
+
+        WebElement buttonToAllWatchesList = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[3]/header/div/nav/ul/li[1]/ul/li[2]")));
+
+        buttonToAllWatchesList.click();
+        WebElement buttonToClassicWatches;
+
+
+        buttonToClassicWatches = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='maincontent']/div[2]/div/div/div[1]/div/div/div[2]/div[1]/a")));
+
+        buttonToClassicWatches.click();
+
+        WebElement buttonToWatches;
+        buttonToWatches = driver.findElement(By.partialLinkText(nameModelOfWatches));
+        buttonToWatches.click();
+
+
+        WebElement buttonAddToCart;
+        buttonAddToCart = driver.findElement(By.className("tocart"));
+        buttonAddToCart.click();
+
+        WebElement buttonToCart;
+        buttonToCart = driver.findElement(By.className("showcart"));
+        buttonToCart.click();
+
+
+        WebElement quantitiesOfItemInCart;
+        quantitiesOfItemInCart = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='control qty']/input")));
+        quantitiesOfItemInCart.clear();
+        quantitiesOfItemInCart.sendKeys(numberOfCount);
+
+
+        Thread.sleep(3000);
+        new WebDriverWait(driver, Duration.ofSeconds(200))
+                .until(CustomConditions.jQueryAJAXsCompleted());
+
+
+
+
+        WebElement priceText = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//td[@class='col price']/span/span[@class='cart-price']/span[@class='price']")));
+        String currentPriceOfOneItemText = priceText.getText().toString();
+        WebElement subtotalText = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//td[@class='col subtotal']/span/span[@class='cart-price']/span[@class='price']")));
+        String currentPriceOfMoreItemText = subtotalText.getText().toString();
+
+        double currentPriceOfOneItem = Double.parseDouble(currentPriceOfOneItemText.substring(1));
+        double currentPriceOfMoreItem = Double.parseDouble(currentPriceOfMoreItemText.substring(1));
+
+        System.out.println(currentPriceOfOneItem + " " + currentPriceOfMoreItem);
+
+        //Thread.sleep(3000);
+        Assert.assertEquals(currentPriceOfOneItem * Integer.parseInt(numberOfCount), currentPriceOfMoreItem);
+    }
+
 
     @AfterTest(alwaysRun = true)
     public void browserTearDown(){
