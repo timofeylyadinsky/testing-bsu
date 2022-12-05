@@ -44,9 +44,9 @@ public class CasioTest {
                 .openPage()
                 .addItemToCart()
                 .goToCartPage();
-        WebElement cartInfo = new CasioCartPage(driver)
-                .getCartInfo();
-        Assert.assertNotNull(cartInfo);
+        //WebElement cartInfo = new CasioCartPage(driver)
+          //      .getCartInfo();
+        //Assert.assertNotNull(cartInfo);
     }
 
     @Test

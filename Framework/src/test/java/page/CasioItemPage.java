@@ -1,11 +1,13 @@
 package page;
 
+import model.Item;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import service.ItemCreator;
 import utils.Waits;
 
 import java.time.Duration;
@@ -46,7 +48,8 @@ public class CasioItemPage extends AbstractPage{
 
     @Override
     public CasioItemPage openPage(){
-        driver.get(CASIO_ITEM_PAGE_URL);
+        Item testItem = ItemCreator.withCredentialsFromProperty();
+        driver.get(testItem.getItemURL());
         Waits.getWebElementUntilWait(driver, By.id("hs-eu-decline-button"));
         if(closeCookieWindowButton!=null) {
             closeCookieWindowButton.click();
