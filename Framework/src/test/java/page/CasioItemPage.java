@@ -33,6 +33,7 @@ public class CasioItemPage extends AbstractPage{
     }
 
     public CasioItemPage addItemToCart(){
+        System.out.println("addItemToCart. Thread id is: " + Thread.currentThread().getId());
         Waits.getWebElementUntilWait(driver, addToCartButton);
         addToCart.click();
         return this;
@@ -48,9 +49,11 @@ public class CasioItemPage extends AbstractPage{
     public CasioItemPage openPage(){
         Item testItem = ItemCreator.withCredentialsFromProperty();
         driver.get(testItem.getItemURL());
+        System.out.println("testItem.getItemURL(). Thread id is: " + Thread.currentThread().getId() + " " + testItem.getItemURL());
         Waits.getWebElementUntilWait(driver, By.id("hs-eu-decline-button"));
         if(closeCookieWindowButton!=null) {
-            closeCookieWindowButton.click();
+            //closeCookieWindowButton.click();
+            System.out.println("Click cookie. Thread id is: " + Thread.currentThread().getId() + " " + testItem.getItemURL());
         }
         return this;
     }

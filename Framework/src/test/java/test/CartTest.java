@@ -24,12 +24,14 @@ public class CartTest extends CommonConditions{
         System.out.println("Sample test-method One. Thread id is: " + id);
         assertThat(allProductNamesInCart).contains(testItem.getItemName());
     }
-    //@Test
+    @Test
     public void test3(){
         long id = Thread.currentThread().getId();
         System.out.println("Sample test-method Two. Thread id is: " + id);
         Item testItem = ItemCreator.withCredentialsFromProperty();
         new CasioItemPage(driver)
-                .openPage();
+                .openPage()
+                .addItemToCart()
+                .goToCartPage();
     }
 }
