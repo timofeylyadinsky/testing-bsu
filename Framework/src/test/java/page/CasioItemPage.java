@@ -14,8 +14,6 @@ import java.time.Duration;
 
 public class CasioItemPage extends AbstractPage{
 
-    public static String CASIO_ITEM_PAGE_URL = "https://www.casio.co.uk/wva-m640d-2aer";
-
     @FindBy(id = "hs-eu-decline-button")
     private WebElement closeCookieWindowButton;
 

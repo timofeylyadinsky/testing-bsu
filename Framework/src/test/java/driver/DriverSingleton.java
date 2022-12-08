@@ -14,6 +14,7 @@ public class DriverSingleton {
 
     public static WebDriver getDriver(){
         if(null == driver){
+            System.out.println("Driver Singleton. Thread id is: " + Thread.currentThread().getId());
             switch (System.getProperty("browser")){
                 case "firefox":{
                     WebDriverManager.firefoxdriver().setup();
@@ -33,6 +34,7 @@ public class DriverSingleton {
             }
             driver.manage().window().maximize();
         }
+        System.out.println("Driver Singleton outside. Thread id is: " + Thread.currentThread().getId());
         return driver;
     }
 

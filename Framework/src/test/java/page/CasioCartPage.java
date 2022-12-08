@@ -18,9 +18,6 @@ public class CasioCartPage extends AbstractPage{
     @FindBy(id = "hs-eu-decline-button")
     private WebElement closeCookieWindowButton;
 
-
-
-
     private By cartItem = By.xpath("//div[@class='product-item-details']/strong");
 
     public CasioCartPage(WebDriver driver){
@@ -37,7 +34,6 @@ public class CasioCartPage extends AbstractPage{
          System.out.println("Text:\n" + listOfNameAllItemsInCart);
         return listOfNameAllItemsInCart;
     }
-
 
     @Override
     public CasioCartPage openPage(){
