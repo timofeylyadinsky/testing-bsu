@@ -31,7 +31,7 @@ public class CartTest extends CommonConditions{
         Item testItem = ItemCreator.withCredentialsFromProperty();
         new CasioItemPage(driver)
                 .openPage()
-                .addItemToCart()
-                .goToCartPage();
+                .addItemToCart();
+                //.goToCartPage();
     }
 }

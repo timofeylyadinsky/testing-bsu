@@ -8,3 +8,4 @@ public class Main {
 //mvn -Dbrowser=chrome -Dsurefire.suiteXmlFiles=src\test\resources\testng-smoke.xml clean test
 
 //mvn -Dbrowser=chrome -DfileName="src\test\resources\testng-smoke.xml" clean test
+//mvn -Dbrowser=chrome -DfileName="src\test\resources\testng-smoke.xml" -Denvironment=qa clean test

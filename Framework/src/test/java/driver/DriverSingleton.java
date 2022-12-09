@@ -40,7 +40,8 @@ public class DriverSingleton {
     }
 
     public static void closeBrowser(){
+        System.out.println("Driver Singleton outside. Thread id is: " + Thread.currentThread().getId());
         driver.get().quit();
-        driver.set(null);
+        driver.remove();
     }
 }

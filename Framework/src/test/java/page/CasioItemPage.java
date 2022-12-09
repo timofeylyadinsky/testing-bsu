@@ -52,7 +52,7 @@ public class CasioItemPage extends AbstractPage{
         System.out.println("testItem.getItemURL(). Thread id is: " + Thread.currentThread().getId() + " " + testItem.getItemURL());
         Waits.getWebElementUntilWait(driver, By.id("hs-eu-decline-button"));
         if(closeCookieWindowButton!=null) {
-            //closeCookieWindowButton.click();
+            closeCookieWindowButton.click();
             System.out.println("Click cookie. Thread id is: " + Thread.currentThread().getId() + " " + testItem.getItemURL());
         }
         return this;
