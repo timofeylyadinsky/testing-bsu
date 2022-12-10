@@ -1,6 +1,8 @@
 package page;
 
+import model.Item;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,14 +58,14 @@ public class CasioCartPage extends AbstractPage{
             return true;
         }else return false;
     }
-
+*/
     public String checkCartMessage(){
         if(isCartEmpty()){
             System.out.println(cartMessageBlock.getText());
             return cartMessageBlock.getText();
         }
-        else return "ERROR EXCEPTION";
-    }*/
+        else return null;
+    }
 
     public boolean deleteItemFromCart(){
         Waits.getWebElementUntilWait(driver, removeItem);
@@ -84,16 +86,31 @@ public class CasioCartPage extends AbstractPage{
     public boolean isCartEmpty(){
         return cartItemInfo.isEmpty();
     }
-    public void changeQuantityOfElementToTwo(){
-        int quantityOfElements = 2;
-        System.out.println("changeQuantityOfElementToTwo. Thread id is: " + Thread.currentThread().getId());
-        WebElement quantitiesOfItemInCart;
-        quantitiesOfItemInCart = (new WebDriverWait(driver, Duration.ofSeconds(10)))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='control qty']/input")));
-        quantitiesOfItemInCart.clear();
-        quantitiesOfItemInCart.sendKeys(Integer.toString(quantityOfElements));
-        //Thread.sleep(3000);
-        new Waits().waitUntilPageLoad(driver);
+
+    public int getCountOfCurrentItem(Item currentItem){
+        By inputBoxForCurrentElement = By.xpath("//strong[@class='product-item-name' and contains(.,'"+ currentItem.getItemName()+"')]/../../../td[@class='col qty']/div/div/input");
+        WebElement quantityBox = driver.findElement(inputBoxForCurrentElement);
+        System.out.println(quantityBox.getAttribute("value"));
+        return Integer.parseInt(quantityBox.getAttribute("value").toString());
+    }
+
+    public double getSubtotalPrice(Item currentItem){
+        WebElement subtotalText = Waits.getWebElementUntilWait(driver, By.xpath("//strong[@class='product-item-name' and contains(.,'"
+                + currentItem.getItemName()+
+                "')]/../../../td[@class='col subtotal']/span/span[@class='cart-price']/span[@class='price']"));
+        String currentPriceOfMoreItemText = subtotalText.getText().toString();
+
+        double currentPriceOfMoreItem = Double.parseDouble(currentPriceOfMoreItemText.substring(1));
+        return currentPriceOfMoreItem;
+    }
+
+    public double getItemPrice(Item currentItem){
+        WebElement priceText = Waits.getWebElementUntilWait(driver, By.xpath("//strong[@class='product-item-name' and contains(.,'"
+                + currentItem.getItemName()+
+                "')]/../../../td[@class='col price']/span/span[@class='cart-price']/span[@class='price']"));
+        String currentPriceOfOneItemText = priceText.getText().toString();
+        double currentPriceOfOneItem = Double.parseDouble(currentPriceOfOneItemText.substring(1));
+        return currentPriceOfOneItem;
     }
 
     @Override
