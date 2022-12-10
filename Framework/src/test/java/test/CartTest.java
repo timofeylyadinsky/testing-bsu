@@ -1,6 +1,7 @@
 package test;
 
 import model.Item;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 //import org.junit.jupiter.api.Test;
 import page.CasioCartPage;
@@ -63,7 +64,7 @@ public class CartTest extends CommonConditions{
                 .isTrue();
     }
 
-    @Test
+    //@Test
     public void checkMessageInEmptyCart(){
         long id = Thread.currentThread().getId();
         System.out.println("checkMessageInEmptyCart. Thread id is: " + id);
@@ -84,6 +85,7 @@ public class CartTest extends CommonConditions{
         new CasioItemPage(driver)
                 .openPage()
                 .addItemToCart();
+        driver.navigate().refresh();
         new CasioItemPage(driver)
                 .addItemToCart()
                 .goToCartPage();
@@ -95,10 +97,10 @@ public class CartTest extends CommonConditions{
                 .getItemPrice(testItem);
         int expectedCount = 2;
         assertThat(countOfItem)
-                .as("Check by subtotal and price for one item")
+                .as("Check subtotal price")
                 .isEqualTo((int) (subtotalPriceOfItem / currentPriceOfItem));
         assertThat(countOfItem)
-                .as("check by expected 2")
+                .as("check by expected 2 elements")
                 .isEqualTo(expectedCount);
     }
 }
