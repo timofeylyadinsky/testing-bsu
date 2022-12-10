@@ -1,6 +1,8 @@
 package page;
 
 import model.Item;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 
 public class CasioHomePage extends AbstractPage{
     public static String CASIO_HOME_PAGE_URL = "https://www.casio.co.uk/";
+
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id = "hs-eu-decline-button")
     private WebElement closeCookieWindowButton;
@@ -37,26 +41,28 @@ public class CasioHomePage extends AbstractPage{
 
     public List<String> searchByNameResult(String testItem){
         setTextInSearchBox(testItem);
-        //Waits.getWebElementUntilWait(driver, searchResults);
-        //List<WebElement> searchResult = driver.findElements(searchResults);
-        return searchingItems.stream().map(it -> it.getText().toLowerCase()).collect(Collectors.toList());
+        logger.info("search element: " + testItem);
+        return searchingItems
+                .stream().map(it -> it.getText().toLowerCase()).collect(Collectors.toList());
     }
 
     public String getEmptySearchMessage(){
         Waits.getWebElementUntilWait(driver, emptySearchMessage);
-        System.out.println(driver.findElements(emptySearchMessage).size());
+        logger.info("Empty message of cart: " + driver.findElement(emptySearchMessage).getText());
         return driver.findElement(emptySearchMessage).getText();
     }
 
     public void setTextInSearchBox(String text){
         Waits.getWebElementUntilWait(driver, searchInputBox);
         searchBox.sendKeys(text);
+        logger.info("send keys fo search box: " + text);
     }
     @Override
     public CasioHomePage openPage(){
         driver.get(CASIO_HOME_PAGE_URL);
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("hs-eu-decline-button")));
+        logger.info("close cookie window");
         closeCookieWindowButton.click();
         return this;
     }

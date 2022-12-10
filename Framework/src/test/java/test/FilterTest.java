@@ -1,5 +1,7 @@
 package test;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 import page.CasioCollectionPage;
 
@@ -10,8 +12,10 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FilterTest extends CommonConditions{
+    private final Logger logger = LogManager.getRootLogger();
     @Test
     public void filterPriceAscending(){
+        logger.info("Start filterPriceAsc Test");
         driver.get("https://www.casio.co.uk/watches-clocks/casio-collection?p=1&product_list_order=price_asc");
         CasioCollectionPage itemsPage = new CasioCollectionPage(driver);
         List<Double> pricesFromPage = itemsPage.getPriceList();
@@ -22,6 +26,7 @@ public class FilterTest extends CommonConditions{
     }
     @Test
     public void filterPriceDescending(){
+        logger.info("start filterPriceDesc test");
         driver.get("https://www.casio.co.uk/watches-clocks/casio-collection?product_list_order=price_desc");
         CasioCollectionPage itemsPage = new CasioCollectionPage(driver);
         List<Double> pricesFromPage = itemsPage.getPriceList();

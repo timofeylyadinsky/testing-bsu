@@ -7,6 +7,7 @@ public class ItemCreator {
     public static final String TESTDATA_ITEM_URL = "testdata.item.url";
 
     public static Item withCredentialsFromProperty(){
+
         return new Item(TestDataReader.getTestData(TESTDATA_ITEM_NAME),
                 TestDataReader.getTestData(TESTDATA_ITEM_URL));
     }

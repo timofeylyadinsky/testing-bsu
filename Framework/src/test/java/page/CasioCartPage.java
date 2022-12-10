@@ -1,22 +1,20 @@
 package page;
 
 import model.Item;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Waits;
 
-import java.time.Duration;
-import java.util.Arrays;
 import java.util.List;
 
 public class CasioCartPage extends AbstractPage{
 
-    public static String CASIO_ITEM_PAGE_URL = "https://www.casio.co.uk/checkout/cart/";
+    public static String CASIO_CART_PAGE_URL = "https://www.casio.co.uk/checkout/cart/";
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id = "hs-eu-decline-button")
     private WebElement closeCookieWindowButton;
@@ -48,20 +46,13 @@ public class CasioCartPage extends AbstractPage{
          for(WebElement i : cartItemInfo){
              listOfNameAllItemsInCart += i.getText() + "\n";
          }
-         System.out.println("Text:\n" + listOfNameAllItemsInCart);
+         logger.info("Items in cart: " + listOfNameAllItemsInCart);
         return listOfNameAllItemsInCart;
     }
 
-    /*public boolean isCartEmpty(){
-        Waits.getWebElementUntilWait(driver, cartMessage);
-        if(cartMessageBlock.isDisplayed()){
-            return true;
-        }else return false;
-    }
-*/
     public String checkCartMessage(){
         if(isCartEmpty()){
-            System.out.println(cartMessageBlock.getText());
+            logger.info(cartMessageBlock.getText());
             return cartMessageBlock.getText();
         }
         else return null;
@@ -81,6 +72,7 @@ public class CasioCartPage extends AbstractPage{
             }
             System.out.println("Remove element count  = " + removeItemButton.size());
         }
+        logger.info("remove items from cart");
         return cartItemInfo.size() == 0;
     }
     public boolean isCartEmpty(){
@@ -90,7 +82,9 @@ public class CasioCartPage extends AbstractPage{
     public int getCountOfCurrentItem(Item currentItem){
         By inputBoxForCurrentElement = By.xpath("//strong[@class='product-item-name' and contains(.,'"+ currentItem.getItemName()+"')]/../../../td[@class='col qty']/div/div/input");
         WebElement quantityBox = driver.findElement(inputBoxForCurrentElement);
-        System.out.println(quantityBox.getAttribute("value"));
+        logger.info("find quantity of items: " + currentItem.getItemName()
+                + " quantity: "
+                + quantityBox.getAttribute("value"));
         return Integer.parseInt(quantityBox.getAttribute("value").toString());
     }
 
@@ -101,6 +95,7 @@ public class CasioCartPage extends AbstractPage{
         String currentPriceOfMoreItemText = subtotalText.getText().toString();
 
         double currentPriceOfMoreItem = Double.parseDouble(currentPriceOfMoreItemText.substring(1));
+        logger.info("find price for items: " + currentItem.getItemName() + " price: " + currentPriceOfMoreItem);
         return currentPriceOfMoreItem;
     }
 
@@ -110,12 +105,14 @@ public class CasioCartPage extends AbstractPage{
                 "')]/../../../td[@class='col price']/span/span[@class='cart-price']/span[@class='price']"));
         String currentPriceOfOneItemText = priceText.getText().toString();
         double currentPriceOfOneItem = Double.parseDouble(currentPriceOfOneItemText.substring(1));
+        logger.info("find price for item: " + currentItem.getItemName() + " price: " + currentPriceOfOneItemText);
         return currentPriceOfOneItem;
     }
 
     @Override
     public CasioCartPage openPage(){
-        driver.get(CASIO_ITEM_PAGE_URL);
+        driver.get(CASIO_CART_PAGE_URL);
+        logger.info("Open Cart page: " + CASIO_CART_PAGE_URL);
         return this;
     }
 }
