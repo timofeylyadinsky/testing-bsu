@@ -9,3 +9,5 @@ public class Main {
 
 //mvn -Dbrowser=chrome -DfileName="src\test\resources\testng-smoke.xml" clean test
 //mvn -Dbrowser=chrome -DfileName="src\test\resources\testng-smoke.xml" -Denvironment=qa clean test
+
+//parallel="methods" thread-count="2"

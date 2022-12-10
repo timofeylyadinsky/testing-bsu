@@ -17,6 +17,12 @@ public class Waits {
                         .presenceOfElementLocated(elementPath));
     }
 
+    public static WebElement getWebElementUntilClickableWait(WebDriver driver, By elementPath){
+        return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions
+                        .elementToBeClickable(elementPath));
+    }
+
     public Boolean waitUntilPageLoad(WebDriver driver) {
         return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
     }
