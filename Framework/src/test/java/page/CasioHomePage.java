@@ -21,22 +21,37 @@ public class CasioHomePage extends AbstractPage{
 
     @FindBy(xpath = "//input[@id='search' and @placeholder='Search here']")
     private WebElement searchBox;
+
+    @FindBy(xpath = "//li/a/div[@class='klevu-name-desc-l2']/div[@class='klevu-name-l2']")
+    private List<WebElement> searchingItems;
+
     private final By searchInputBox = By.xpath("//input[@id='search' and @placeholder='Search here']");
 
     private final By searchResults = By.xpath("//li/a/div[@class='klevu-name-desc-l2']/div[@class='klevu-name-l2']");
+
+    private final By emptySearchMessage = By.xpath("//div[@class='klevuNoResults-message']");
 
     public CasioHomePage(WebDriver driver){
         super(driver);
     }
 
     public List<String> searchByNameResult(String testItem){
-        Waits.getWebElementUntilWait(driver, searchInputBox);
-        searchBox.sendKeys(testItem);
-        Waits.getWebElementUntilWait(driver, searchResults);
-        List<WebElement> searchResult = driver.findElements(searchResults);
-        return searchResult.stream().map(it -> it.getText().toLowerCase()).collect(Collectors.toList());
+        setTextInSearchBox(testItem);
+        //Waits.getWebElementUntilWait(driver, searchResults);
+        //List<WebElement> searchResult = driver.findElements(searchResults);
+        return searchingItems.stream().map(it -> it.getText().toLowerCase()).collect(Collectors.toList());
     }
 
+    public String getEmptySearchMessage(){
+        Waits.getWebElementUntilWait(driver, emptySearchMessage);
+        System.out.println(driver.findElements(emptySearchMessage).size());
+        return driver.findElement(emptySearchMessage).getText();
+    }
+
+    public void setTextInSearchBox(String text){
+        Waits.getWebElementUntilWait(driver, searchInputBox);
+        searchBox.sendKeys(text);
+    }
     @Override
     public CasioHomePage openPage(){
         driver.get(CASIO_HOME_PAGE_URL);
