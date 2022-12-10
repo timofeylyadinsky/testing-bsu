@@ -17,7 +17,7 @@ public class CartTest extends CommonConditions{
     private final String emptyCartMessage = "You have no items in your shopping basket.";
     private final String secondCartMessage = "Click here to continue shopping.";
 
-    //@Test
+    @Test
     public void addItemToCart(){
         long id = Thread.currentThread().getId();
         System.out.println("addItemToCart start. Thread id is: " + id);
@@ -33,7 +33,7 @@ public class CartTest extends CommonConditions{
                 .contains(testItem.getItemName());
     }
 
-    //@Test
+    @Test
     public void checkEmptyCart(){
         long id = Thread.currentThread().getId();
         System.out.println("checkEmptyCart start. Thread id is: " + id);
@@ -46,7 +46,7 @@ public class CartTest extends CommonConditions{
                 .isEqualTo(expectedEmpty);
     }
 
-    //@Test
+    @Test
     public void deleteItemFromCart(){
         long id = Thread.currentThread().getId();
         System.out.println("deleteItemFromCart start. Thread id is: " + id);
@@ -64,7 +64,7 @@ public class CartTest extends CommonConditions{
                 .isTrue();
     }
 
-    //@Test
+    @Test
     public void checkMessageInEmptyCart(){
         long id = Thread.currentThread().getId();
         System.out.println("checkMessageInEmptyCart. Thread id is: " + id);
@@ -77,7 +77,7 @@ public class CartTest extends CommonConditions{
 
     }
 
-    //@Test
+    @Test
     public void addTwoSimilarItemToCart(){
         long id = Thread.currentThread().getId();
         System.out.println("addTwoSimilarItemToCart. Thread id is: " + id);
