@@ -61,16 +61,16 @@ public class CasioCartPage extends AbstractPage{
     public boolean deleteItemFromCart(){
         Waits.getWebElementUntilWait(driver, removeItem);
         if(!removeItemButton.isEmpty()){
-            System.out.println("Remove element count  = " + removeItemButton.size() + " " + cartItemInfo.size());
+            logger.info("Remove element count  = " + removeItemButton.size() + " " + cartItemInfo.size());
             while(removeItemButton.size() > 0){
                 Waits.getWebElementUntilWait(driver, removeItem);
                 removeItemButton.get(0).click();
-                System.out.println("Remove element count  = " + removeItemButton.size());
+                logger.info("Remove element count  = " + removeItemButton.size());
                 Waits.getWebElementUntilClickableWait(driver,acceptDelete);
                 WebElement acceptDeleteButton = driver.findElement(acceptDelete);
                 acceptDeleteButton.click();
             }
-            System.out.println("Remove element count  = " + removeItemButton.size());
+            logger.info("Remove element count  = " + removeItemButton.size());
         }
         logger.info("remove items from cart");
         return cartItemInfo.size() == 0;
