@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 import page.CasioHomePage;
+import service.SearchNameCreator;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,22 +16,24 @@ public class SearchTest extends CommonConditions{
 
     @Test
     public void searchWatchesByParameter(){
-        String searchNameOfItem = "f-91";
+        String searchNameOfItem = SearchNameCreator.withCredentialsFromPropertyValid().toLowerCase();
         logger.info("start search watches: " + searchNameOfItem);
         List<String> actualSearchResults = new CasioHomePage(driver)
                 .openPage()
                 .searchByNameResult(searchNameOfItem);
+        logger.info("search size: " + actualSearchResults.size());
         assertThat(actualSearchResults)
-                .allMatch(it -> it.contains(searchNameOfItem));
+                .allMatch(it -> it.contains(searchNameOfItem))
+                .hasSizeGreaterThan(0);
     }
 
     @Test
     public void searchWithInvalidText(){
-        String invalidString = "wwwwwww";
+        String invalidString = SearchNameCreator.withCredentialsFromPropertyInvalid().toLowerCase();
         logger.info("start search invalid " + invalidString);
         new CasioHomePage(driver)
                 .openPage()
-                .searchByNameResult(invalidString);
+                .setTextInSearchBox(invalidString);
         String message = new CasioHomePage(driver)
                 .getEmptySearchMessage();
         assertThat(message)

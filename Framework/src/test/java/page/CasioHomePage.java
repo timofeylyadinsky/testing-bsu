@@ -42,6 +42,7 @@ public class CasioHomePage extends AbstractPage{
     public List<String> searchByNameResult(String testItem){
         setTextInSearchBox(testItem);
         logger.info("search element: " + testItem);
+        Waits.getWebElementUntilClickableWait(driver,searchResults);
         return searchingItems
                 .stream().map(it -> it.getText().toLowerCase()).collect(Collectors.toList());
     }
