@@ -1,3 +1,5 @@
+.allure/allure-2.20.0
+.allure
 out/
 .idea/
 .idea_modules/
@@ -5,4 +7,4 @@ target
 *.iml
 *.ipr
 *.iws
-.allure/allure-2.20.0
+
