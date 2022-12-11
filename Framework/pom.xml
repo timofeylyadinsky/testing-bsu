@@ -12,6 +12,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--        <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>-->
+        <aspectj.version>1.9.9</aspectj.version>
+        <allure-testng.version>2.20.0</allure-testng.version>
         <!--<junit.jupiter.version>5.7.1</junit.jupiter.version>-->
     </properties>
 
@@ -70,6 +73,11 @@
             <version>3.23.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -83,16 +91,32 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
                 <configuration>
+                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
+                        </property>
+                    </systemProperties>
                     <suiteXmlFiles>
                         <!--suppress UnresolvedMavenProperty -->
                         <suiteXmlFile>${fileName}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <properties>
-                        <property>
-                            <name>junit</name>
-                            <value>false</value>
-                        </property>
-                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+                <configuration>
+                    <reportVersion>2.20.0</reportVersion>
                 </configuration>
             </plugin>
         </plugins>
